@@ -1,0 +1,22 @@
+{
+  "type": "module",
+  "private": true,
+  "workspaces": [
+    "server",
+    "client",
+    "e2e"
+  ],
+  "scripts": {
+    "build:client": "yarn workspace agentaicontent-client build",
+    "dev": "yarn workspace agentaicontent-server dev",
+    "dev:debug": "yarn workspace agentaicontent-server dev:debug",
+    "heroku-postbuild": "yarn workspace agentaicontent-client build",
+    "start": "yarn workspace agentaicontent-server start",
+    "dev:cypress": "yarn workspace agentaicontent-server dev:e2e",
+    "e2e:open": "yarn workspace agentaicontent-e2e e2e:open",
+    "e2e:run": "yarn workspace agentaicontent-e2e e2e:run"
+  },
+  "engines": {
+    "node": "^16.18"
+  }
+}
