@@ -9,10 +9,10 @@ const LandingPage = () => {
   const [generatedPrompts, setGeneratedPrompts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
 
-  const generatePrompt = async (personPlace, action, genre) => {
+  const generatePrompt = async (userContent) => {
     setIsLoading(true)
     try {
-      const promptText = `as a ${personPlace} create a ${genre} with a goal of ${action}  (max tokens 200)`
+      const promptText = userContent
       const response = await fetch(`/api/v1/openai/generate-prompt?promptText=${promptText}`)
       const data = await response.json()
       setIsLoading(false)
@@ -23,8 +23,8 @@ const LandingPage = () => {
     }
   }
 
-  const handleGeneratePrompt = async (personPlace, action, genre) => {
-    const generatedPrompt = await generatePrompt(personPlace, action, genre)
+  const handleGeneratePrompt = async (userContent) => {
+    const generatedPrompt = await generatePrompt(userContent)
     setPrompt(generatedPrompt)
   }
   
@@ -33,8 +33,8 @@ const LandingPage = () => {
       <div className='generate-prompt-form'>
         <GetNewPromptForm onGeneratePrompt={handleGeneratePrompt} isLoading={isLoading}/>
       </div>
-      <div className={`gen-prompt-container ${!prompt ? 'hidden' : ''}`}>
-      <p id="gen-animate" className='gen-prompt-box' value={prompt} />
+      <div className='callout'>
+      {prompt}
     </div>
     </div>
   )

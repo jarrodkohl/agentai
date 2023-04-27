@@ -11,6 +11,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const app = express();
 import hbsMiddleware from "express-handlebars";
+import dotenv from 'dotenv';
+dotenv.config({ path: path.resolve(__dirname, '../../.env') });
+
+
 app.set("views", path.join(__dirname, "../views"));
 app.engine(
   "hbs",
