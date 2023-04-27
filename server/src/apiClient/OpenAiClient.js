@@ -14,9 +14,12 @@ class OpenAiClient {
       model: "gpt-3.5-turbo",
       "messages": [{"role": "user", "content": promptText}],
     });
-    console.log(response.data.choices[0].message);
+    console.log(response.data.usage);
 
-    return response.data.choices[0].message.content
+    return {
+      content: response.data.choices[0].message.content,
+      usage: response.data.usage.total_tokens,
+    }
   }
 }
 

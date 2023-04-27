@@ -6,8 +6,9 @@ import { useState } from 'react';
 
 const LandingPage = () => {
   const [prompt, setPrompt] = useState("")
-  const [generatedPrompts, setGeneratedPrompts] = useState([])
+  // const [generatedPrompts, setGeneratedPrompts] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [usage, setUsage] = useState(0)
 
   const generatePrompt = async (userContent) => {
     setIsLoading(true)
@@ -16,7 +17,7 @@ const LandingPage = () => {
       const response = await fetch(`/api/v1/openai/generate-prompt?promptText=${promptText}`)
       const data = await response.json()
       setIsLoading(false)
-      return data.prompt
+      return data
     } catch (error) {
       console.error(error)
       return ''
@@ -24,8 +25,9 @@ const LandingPage = () => {
   }
 
   const handleGeneratePrompt = async (userContent) => {
-    const generatedPrompt = await generatePrompt(userContent)
+    const {prompt: generatedPrompt, usage: generatedUsage } = await generatePrompt(userContent)
     setPrompt(generatedPrompt)
+    setUsage(generatedUsage)
   }
   
   return (
@@ -35,6 +37,10 @@ const LandingPage = () => {
       </div>
       <div className='callout'>
       {prompt}
+    </div>
+    <div className="usage-container">
+      <h3>Token Usage</h3>
+      <p>Total Tokens: {usage}</p>
     </div>
     </div>
   )

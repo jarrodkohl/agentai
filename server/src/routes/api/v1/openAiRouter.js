@@ -10,8 +10,8 @@ openAiRouter.get('/generate-prompt', async (req, res) => {
   console.log(req.query)
   const { promptText } = req.query
   try {
-    const generatedPrompt = await OpenAiClient.generatePrompt(promptText)
-    res.json({ prompt: generatedPrompt })
+    const {content, usage } = await OpenAiClient.generatePrompt(promptText)
+    res.json({ prompt: content, usage: usage })
   } catch (error) {
     console.error(error)
     res.status(500).json({ message: 'An error occurred' })
