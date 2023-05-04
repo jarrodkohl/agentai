@@ -38,10 +38,6 @@ const LandingPage = () => {
       <div className='callout'>
       {prompt}
     </div>
-    <div className="usage-container">
-      <h3>Token Usage</h3>
-      <p>Total Tokens: {usage}</p>
-    </div>
     </div>
   )
 }
